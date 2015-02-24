@@ -1,0 +1,63 @@
+//// setting custom class ////
+@font-face{font-family:'Open Sans';font-style:normal;font-weight:normal;src:local('Open Sans'),local('OpenSans'),url('fonts/OpenSans-Regular.ttf') format('truetype')}@font-face{font-family:'Open Sans';font-weight:300;src:local('Open Sans'),local('OpenSans'),url('fonts/OpenSans-Light.ttf') format('truetype')}@font-face{font-family:'Open Sans';font-weight:700;src:local('Open Sans'),local('OpenSans'),url('fonts/OpenSans-Bold.ttf') format('truetype')}
+
+.translate (@x: -50%, @y: -50%)
+{
+    -webkit-transform: translate( @x, @y );
+    -moz-transform: translate( @x, @y );
+    -o-transform: translate( @x, @y );
+    transform: translate( @x, @y );
+}
+
+.center
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  .translate(-50%, -50%);
+
+}
+
+.animate(@temp: .2s)
+{
+    -webkit-transition: all @temp ease-in-out;
+    -moz-transition: all @temp ease-in-out;
+    -o-transition: all @temp ease-in-out;
+    transition: all @temp ease-in-out;
+}
+
+//////// STYLE ///////
+.loading
+{
+    font-family: 'Open Sans', sans-serif;
+
+    .center;
+
+    > .contentBar
+    {
+        width: 260px;
+        height: 11px;
+        border: 2px solid #286181;
+        float: left;
+
+        > .barProgress
+        {
+            height: 12px;
+            background: #286181;
+
+            .animate();
+        }
+    }
+
+    > .percent
+    {
+        float: left;
+        margin-left: 10px;
+        position: relative;
+        top: -1px;
+        color: #286181;
+        font-size: 12px;
+        width: 50px;
+    }
+}

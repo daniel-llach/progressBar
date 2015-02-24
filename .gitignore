@@ -28,7 +28,7 @@ node_modules
 .lock-wscript
 
 # Bower Components
-#bower_components/*
+bower_components/*
 
 # OSX data store
 .DS_Store

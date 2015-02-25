@@ -15,6 +15,8 @@ define([
             this.listenTo(this.model, "change:loaded", this.update);
 
             this.render();
+
+            this.listenTo(this.model, "bar:ready", this.die);
         },
 
         render: function(){
@@ -22,9 +24,16 @@ define([
         },
 
         update: function(){
+
             var calculateBarWidth = parseInt( (this.model.get("loaded")*100) / this.model.get("total") );
             this.$el.find(".barProgress").css({"width": calculateBarWidth + "%"});
             this.$el.find(".percent").html( calculateBarWidth + "%" );
+
+        },
+
+        die: function(){
+            alert('die!');
+            this.$el.remove();
         }
 
     });

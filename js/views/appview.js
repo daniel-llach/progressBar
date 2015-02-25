@@ -17,34 +17,55 @@ define([
                 total: 100
             });
 
-            this.progressbar2 = new ProgressBar({
-                target: "#ejemplo2",
-                loaded: 0,
-                total: 600
-            });
-
             this.progressbarview = new ProgressBarView({model:this.progressbar});
-            this.progressbarview2 = new ProgressBarView({model:this.progressbar2});
-            this.jqueryButton();
+
+            this.call(this.progressbar.get("total"));
 
             this.listenTo(this.progressbar, "bar:ready", function(){
-                alert("complete progressbar 1!");
-            });
-            this.listenTo(this.progressbar2, "bar:ready", function(){
-                alert("complete progressbar 2!");
+                console.log("complete progressbar 1!");
+
             });
         },
 
-        jqueryButton: function(){
+        call: function(total){
             var self = this;
+            $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            //Do something with upload progress here
+                            self.progressbar.add(percentComplete);
+                        }else{
+                            self.progressbar.add(total/4);
+                        }
+                   }, false);
 
-            $("#elboton").on("click", function(){
-                self.progressbar.add(5);
+                   xhr.addEventListener("progress", function(evt) {
+                       if (evt.lengthComputable) {
+                           var percentComplete = evt.loaded / evt.total;
+                           //Do something with download progress
+                           self.progressbar.add(percentComplete);
+                       }else{
+                           console.log("not computable");
+                           self.progressbar.add(total/4);
+                       }
+                   }, false);
+
+                   return xhr;
+                },
+                type: 'GET',
+                url: "http://localhost/darwined/testing/api_asignaturas",
+                data: {},
+                success: function(data){
+                    //Do something on success
+                    console.log(data);
+                    self.progressbar.add(total/2);
+
+                }
             });
 
-            $("#elboton2").on("click", function(){
-                self.progressbar2.add(55);
-            });
         }
     });
 

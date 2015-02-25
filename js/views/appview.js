@@ -17,11 +17,21 @@ define([
                 total: 100
             });
 
+            this.progressbar2 = new ProgressBar({
+                target: "#ejemplo2",
+                loaded: 0,
+                total: 600
+            });
+
             this.progressbarview = new ProgressBarView({model:this.progressbar});
+            this.progressbarview2 = new ProgressBarView({model:this.progressbar2});
             this.jqueryButton();
 
             this.listenTo(this.progressbar, "bar:ready", function(){
-                alert("complete!");
+                alert("complete progressbar 1!");
+            });
+            this.listenTo(this.progressbar2, "bar:ready", function(){
+                alert("complete progressbar 2!");
             });
         },
 
@@ -30,6 +40,10 @@ define([
 
             $("#elboton").on("click", function(){
                 self.progressbar.add(5);
+            });
+
+            $("#elboton2").on("click", function(){
+                self.progressbar2.add(55);
             });
         }
     });

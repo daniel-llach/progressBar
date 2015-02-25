@@ -22,9 +22,9 @@ define([
         },
 
         update: function(){
-            console.log('ok');
-            this.$el.find(".barProgress").css({"width":this.model.get("loaded") + "%"});
-            this.$el.find(".percent").html( this.model.get("loaded") + "%" );
+            var calculateBarWidth = parseInt( (this.model.get("loaded")*100) / this.model.get("total") );
+            this.$el.find(".barProgress").css({"width": calculateBarWidth + "%"});
+            this.$el.find(".percent").html( calculateBarWidth + "%" );
         }
 
     });

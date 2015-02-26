@@ -2,8 +2,9 @@
 define([
     "backbone",
     "models/progressbar",
-    "views/progressbarview"
-], function (Backbone, ProgressBar, ProgressBarView) {
+    "views/progressbarview",
+    "views/mapper/mapperview",
+], function (Backbone, ProgressBar, ProgressBarView, MapperView) {
     "use strict";
 
     //The overall Grid Component
@@ -19,54 +20,24 @@ define([
 
             this.progressbarview = new ProgressBarView({model:this.progressbar});
 
-            this.call(this.progressbar.get("total"));
+            //this.call(this.progressbar.get("total"));
+            this.mapperview = new MapperView();
+
+            this.listenTo(this.mapperview, "map:ready", this.ProgressBarLoad);
 
             this.listenTo(this.progressbar, "bar:ready", function(){
                 console.log("complete progressbar 1!");
-
             });
         },
 
-        call: function(total){
-            var self = this;
-            $.ajax({
-                xhr: function() {
-                    var xhr = new window.XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", function(evt) {
-                        if (evt.lengthComputable) {
-                            var percentComplete = evt.loaded / evt.total;
-                            //Do something with upload progress here
-                            self.progressbar.add(percentComplete);
-                        }else{
-                            self.progressbar.add(total/4);
-                        }
-                   }, false);
-
-                   xhr.addEventListener("progress", function(evt) {
-                       if (evt.lengthComputable) {
-                           var percentComplete = evt.loaded / evt.total;
-                           //Do something with download progress
-                           self.progressbar.add(percentComplete);
-                       }else{
-                           console.log("not computable");
-                           self.progressbar.add(total/4);
-                       }
-                   }, false);
-
-                   return xhr;
-                },
-                type: 'GET',
-                url: "http://localhost/darwined/testing/api_asignaturas",
-                data: {},
-                success: function(data){
-                    //Do something on success
-                    console.log(data);
-                    self.progressbar.add(total/2);
-
-                }
-            });
-
+        ProgressBarLoad: function(status){
+          var step = 100/status.totalDefinitions;
+          var name = status.modelName;
+          var activity = status.activity;
+          console.log(step, name, activity);
+          this.progressbar.add(step, name, activity);
         }
+
     });
 
 

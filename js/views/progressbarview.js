@@ -11,11 +11,8 @@ define([
 
         initialize: function(){
             this.$el = $(this.model.get("target"));
-
             this.listenTo(this.model, "change:loaded", this.update);
-
             this.render();
-
             this.listenTo(this.model, "bar:ready", this.die);
         },
 
@@ -28,12 +25,17 @@ define([
             var calculateBarWidth = parseInt( (this.model.get("loaded")*100) / this.model.get("total") );
             this.$el.find(".barProgress").css({"width": calculateBarWidth + "%"});
             this.$el.find(".percent").html( calculateBarWidth + "%" );
-
+            this.$el.find(".status").html( this.model.get("name") + " " + this.model.get("activity") );
+            //alert('step');
         },
 
         die: function(){
-            alert('die!');
-            this.$el.remove();
+            //alert('die!');
+            var self = this;
+            setTimeout(function () {
+               self.$el.remove();
+            }, 200);
+
         }
 
     });

@@ -30,11 +30,10 @@ define([
         },
 
         die: function(){
-            //alert('die!');
             var self = this;
             setTimeout(function () {
                self.$el.remove();
-            }, 200);
+            }, 205);
 
         }
 

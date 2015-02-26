@@ -64,8 +64,8 @@ define([
             this.listenTo(this.store, "map:ready", function(status){
                 self.trigger("map:ready", status);
             });
-            this.store.fetchChainFor('Sala');
-            // this.store.fetchChainFor('Asignatura');
+            // this.store.fetchChainFor('Sala');
+            this.store.fetchChainFor('Asignatura');
             // this.store.fetchChainFor('Profesor');
 
             this.export();

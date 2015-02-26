@@ -34,7 +34,6 @@ define([
             setTimeout(function () {
                self.$el.remove();
             }, 205);
-
         }
 
     });

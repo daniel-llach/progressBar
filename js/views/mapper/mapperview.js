@@ -57,7 +57,6 @@ define([
                 self.Darwin.Models[modelName] = model;
                 self.Darwin.Collections[collectionName] = collection;
 
-                //self.storeStatus(totalDefinitions, modelName, "Definido(a)");
             });
 
             this.store = new DarwinStore(this.Darwin);
@@ -76,19 +75,6 @@ define([
             window.Darwin = this.Darwin;
             window.DarwinStore = this.store;
         }
-
-        // storeStatus: function(totalDefinitions, modelName, activity){
-        //     var status = {
-        //         "totalDefinitions": totalDefinitions,
-        //         "modelName": modelName,
-        //         "activity": activity
-        //     }
-        //     alert('step');
-
-        //     this.trigger("map:ready", status);
-
-        // }
-
 
     });
 

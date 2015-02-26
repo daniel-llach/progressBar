@@ -37,7 +37,6 @@ define([
                 } else {
                     return collection.fetch({complete: function(){
                         self.storeStatus(totalDependencies, dep, "cargado(a)");
-                        //alert('step');
                     }});
                 }
             }, this);

@@ -41,8 +41,6 @@ define([
             console.log("ProgressBar ready!");
         }
 
-
-
     });
 
     return AppView;

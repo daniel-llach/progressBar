@@ -26,7 +26,7 @@ define([
             this.$el.find(".barProgress").css({"width": calculateBarWidth + "%"});
             this.$el.find(".percent").html( calculateBarWidth + "%" );
             this.$el.find(".status").html( this.model.get("name") + " " + this.model.get("activity") );
-            //alert('step');
+            // alert('step');
         },
 
         die: function(){
